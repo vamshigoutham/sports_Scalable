@@ -10,29 +10,26 @@ export const Location = () => {
         console.log('submit');
         console.log('values', sport, country);
         if (sport && country) {
-            getAllLocation({ sport, country, onSuccess });
-            // setAllLocations(copyData)
-
+            getAllLocation({ sport, country, successCb: onSuccess });
         }
     }
 
-    function onSuccess() {
-
+    function onSuccess(data) {
+        console.log('Fetched Data:', data); // Debugging: Log the fetched data
+        setAllLocations(data); // Assuming 'data' is the array of location objects you want to display
     }
-
 
     return (
         <div>
-            <div>
-                <Form onSubmit={(value) => onSubmitData(value)} />
-                {console.log('allLocations', allLocations)}
-                {allLocations?.length !== 0 &&
-                    <>
-                        <div className='text-center p-4 mt-6 text-2xl font-semibold'>Locations</div>
-                        <Card location={allLocations} />
-                    </>
-                }
-            </div>
+            <Form onSubmit={onSubmitData} />
+            {allLocations.length > 0 && (
+                <>
+                    <div className='text-center p-4 mt-6 text-2xl font-semibold'>Locations</div>
+                    {allLocations.map((location) => ( // Iterate over allLocations and render a Card for each
+                        <Card key={location._id} location={location} />
+                    ))}
+                </>
+            )}
         </div>
-    )
-}
+    );
+};

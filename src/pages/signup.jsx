@@ -14,8 +14,8 @@ export const Register = () => {
             email: email,
             password: password
         }
-        // fetch('https://LOCATIONLOGIN-env.eba-pgpsjena.us-east-1.elasticbeanstalk.com', {
-        fetch('http://localhost:8000/sign-up', {
+        fetch('http://loginsports-env.eba-bg88pecz.us-east-1.elasticbeanstalk.com/sign-up', {
+            //fetch('http://localhost:8000/sign-up', {
 
             method:'POST',
             headers: {"Content-Type":"application/json"},
@@ -23,30 +23,30 @@ export const Register = () => {
         }).then(res => {
             return res.json()
         })
-        .then(data => {
-            console.log('data', data);
-            if(data?.success === true) {
-                alert(data?.message);
-                if(data?.message === 'User registration is successful') {
-                    navigate('/login');
+            .then(data => {
+                console.log('data', data);
+                if(data?.success === true) {
+                    alert(data?.message);
+                    if(data?.message === 'User registration is successful') {
+                        navigate('/login');
+                    }
                 }
-            }
-            else {
-                alert(data?.message);
-                setEmail('');
-                setPassword('');
-            }
-        })
-        .catch(err => {
-            console.log('err', err);
-        })
+                else {
+                    alert(data?.message);
+                    setEmail('');
+                    setPassword('');
+                }
+            })
+            .catch(err => {
+                console.log('err', err);
+            })
     }
 
     return (
         <div className='mt-24'>
             <div class="max-w-md m-auto bg-white">
                 <div class="border-t-2 border-blue-200 overflow-hidden rounded shadow-lg pt-6">
-                <div class="px-4 mb-4">
+                    <div class="px-4 mb-4">
                         <input
                             type="text"
                             placeholder="Enter Name"

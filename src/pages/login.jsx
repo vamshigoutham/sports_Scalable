@@ -12,8 +12,8 @@ export const Login = () => {
             email: email,
             password: password
         }
-        // fetch('https://loginsports-env.eba-bg88pecz.us-east-1.elasticbeanstalk.com', {
-        fetch('http://localhost:8000/sign-in', {
+        fetch('http://loginsports-env.eba-bg88pecz.us-east-1.elasticbeanstalk.com/sign-in', {
+            //fetch('http://localhost:8000/sign-in', {
 
             method:'POST',
             headers: {"Content-Type":"application/json"},
@@ -21,21 +21,21 @@ export const Login = () => {
         }).then(res => {
             return res.json();
         })
-        .then(data => {
-            console.log('data', data);
-            if(data?.success === true) {
-                localStorage.setItem('token', data?.token);
-                localStorage.setItem('user', JSON.stringify(data?.user));
-                navigate('/');
-            }
-            else {
-                alert(data?.message)
-            }   
-        })
-        .catch(err => {
-            console.log('err', err?.data);
-            alert(err)
-        })
+            .then(data => {
+                console.log('data', data);
+                if(data?.success === true) {
+                    localStorage.setItem('token', data?.token);
+                    localStorage.setItem('user', JSON.stringify(data?.user));
+                    navigate('/');
+                }
+                else {
+                    alert(data?.message)
+                }
+            })
+            .catch(err => {
+                console.log('err', err?.data);
+                alert(err)
+            })
     }
 
     return (
