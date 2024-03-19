@@ -16,7 +16,11 @@ export const Workshop = () => {
     const onChangeHandler = (value) => {
         setSearchValue(value);
         if (value.length > 0) {
-            const result = workshopFixed.filter(item => item.title.toLowerCase().includes(value.toLowerCase()));
+            //const result = workshopFixed.filter(item => item.tags.toLowerCase().includes(value.toLowerCase()));
+            const result = workshopFixed.filter(item =>
+                item.tags.some(tag => tag.toLowerCase().includes(value.toLowerCase()))
+            );
+
             setWorkshop(result);
         }
         else {
