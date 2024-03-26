@@ -11,6 +11,7 @@ import { Login } from './pages/login';
 import { Register } from './pages/signup';
 import { Protected } from './components/protectedWrapper';
 import { Unprotected } from './components/unprotectedWrapper';
+import {PaymentPage} from "./pages/PaymentPage";
 
 function App() {
   let token = localStorage.getItem('token');
@@ -25,6 +26,7 @@ function App() {
         <Route path='/recommender' element={<Protected><BackgroundWrapper><Recommender /></BackgroundWrapper></Protected>} />
         <Route path='/workshop' element={<Protected><BackgroundWrapper><Workshop /></BackgroundWrapper></Protected>} />
         <Route path='/*' element={<Navigate to={token ? '/' : '/login'} replace={true}/>} />
+        <Route path="/payment/:id" element={<Protected><BackgroundWrapper><PaymentPage/></BackgroundWrapper></Protected>} />
       </Routes>
     </Router>
   );

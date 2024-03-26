@@ -12,7 +12,7 @@ export const Login = () => {
             email: email,
             password: password
         }
-        fetch('http://loginsports-env.eba-bg88pecz.us-east-1.elasticbeanstalk.com/sign-in', {
+        fetch('http://payemnt-env.eba-z2yqwtde.us-east-1.elasticbeanstalk.com/sign-in', {
             //fetch('http://localhost:8000/sign-in', {
 
             method:'POST',
