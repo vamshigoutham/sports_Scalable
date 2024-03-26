@@ -20,16 +20,19 @@ export const getAllLocation = ({ sport, country, successCb, errorCb }) => {
 
 
 export const getWorkshopData = ({searchValue, successCb, errorCb}) => {
-    fetch(`https://jz43dl2q96.execute-api.us-east-1.amazonaws.com/newstage/workshops?keyword=${searchValue}`)
-        .then(res => {
-            return res.json();
-        })
+    fetch(`https://1kp8jzrn10.execute-api.us-east-1.amazonaws.com/dev/workshops?keywords=${searchValue}`)
+        .then(res => res.json())
         .then(data => {
-            successCb(data);
+            if (typeof successCb === 'function') {
+                successCb(data);
+            }
         })
         .catch(err => {
             console.log('err', err);
-            errorCb()
-        })
-}
+            if (typeof errorCb === 'function') {
+                errorCb(err); // Pass err to errorCb
+            }
+        });
+};
+
 
