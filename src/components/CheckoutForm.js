@@ -11,7 +11,7 @@ export default function CheckoutForm() {
     const [success, setSuccess] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
-    const price = location.state?.price || 0;
+    const price = location.state?.price || 1000;
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -57,10 +57,51 @@ export default function CheckoutForm() {
         }
     };
 
+    // Inline styles
+    const checkoutFormStyle = {
+        boxSizing: 'border-box',
+        padding: '20px',
+        borderRadius: '8px',
+        boxShadow: '0 4px 8px rgba(0,0,0,0.2)', // Increased box shadow for depth
+        maxWidth: '400px',
+        margin: '20px auto',
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        background: '#ffffff', // Changed background color to white
+    };
+
+    const buttonStyle = {
+        background: '#3f51b5', // Changed button color to a shade of blue
+        color: 'white',
+        padding: '15px 30px', // Increased button padding
+        border: 'none',
+        borderRadius: '4px',
+        marginTop: '20px',
+        cursor: 'pointer',
+        fontSize: '18px', // Increased font size
+        fontWeight: 'bold', // Added bold font weight
+    };
+
+    const errorMessageStyle = {
+        color: '#d32f2f', // Changed error message color to a shade of red
+        background: '#ffebee', // Changed error message background color to light red
+        padding: '15px', // Increased padding
+        borderRadius: '4px',
+        margin: '20px 0', // Increased margin
+    };
+
+    const successMessageStyle = {
+        color: '#388e3c', // Changed success message color to a shade of green
+        background: '#e8f5e9', // Changed success message background color to light green
+        padding: '15px', // Increased padding
+        borderRadius: '4px',
+        margin: '20px 0', // Increased margin
+    };
+
     return (
         <div className="checkout-form" style={checkoutFormStyle}>
-            <form onSubmit={handleSubmit} style={formStyle}>
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column' }}>
                 <CardElement options={cardStyleOptions} />
+                <div style={{ marginTop: '20px', marginBottom: '10px', fontSize: '16px', fontWeight: 'bold' }}>Amount: €{price}</div>
                 <button type="submit" disabled={!stripe || isLoading} style={buttonStyle}>
                     {isLoading ? 'Processing...' : 'Pay'}
                 </button>
@@ -70,35 +111,6 @@ export default function CheckoutForm() {
         </div>
     );
 }
-
-// Inline styles
-const checkoutFormStyle = {
-    boxSizing: 'border-box',
-    padding: '20px',
-    borderRadius: '8px',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-    maxWidth: '400px',
-    margin: '20px auto',
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-};
-
-
-
-const formStyle = {
-    display: 'flex',
-    flexDirection: 'column',
-};
-
-const buttonStyle = {
-    background: '#4CAF50', // This is a green color, you can change it to match your brand
-    color: 'white',
-    padding: '12px 20px',
-    border: 'none',
-    borderRadius: '4px',
-    marginTop: '20px',
-    cursor: 'pointer',
-    fontSize: '16px',
-};
 
 const cardStyleOptions = {
     style: {
@@ -114,20 +126,4 @@ const cardStyleOptions = {
         },
     },
     hidePostalCode: true,
-};
-
-const errorMessageStyle = {
-    color: '#FF6B6B',
-    background: '#FFF0F0',
-    padding: '10px',
-    borderRadius: '4px',
-    margin: '10px 0',
-};
-
-const successMessageStyle = {
-    color: '#31C48D',
-    background: '#E3FCEF',
-    padding: '10px',
-    borderRadius: '4px',
-    margin: '10px 0',
 };

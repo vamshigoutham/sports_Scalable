@@ -8,46 +8,57 @@ export const Workshop = () => {
     const [searchValue, setSearchValue] = useState('');
 
     useEffect(() => {
-        getWorkshopData({ searchValue, successCb: (data) => { setWorkshop(data); setWorkshopFixed(data) } })
-        document.body.style.overflow = 'hidden'
-    }, [])
-
+        getWorkshopData({ searchValue, successCb: (data) => { setWorkshop(data); setWorkshopFixed(data) } });
+        document.body.style.overflow = 'hidden';
+    }, []);
 
     const onChangeHandler = (value) => {
         setSearchValue(value);
         if (value.length > 0) {
-            //const result = workshopFixed.filter(item => item.tags.toLowerCase().includes(value.toLowerCase()));
             const result = workshopFixed.filter(item =>
                 item.tags.some(tag => tag.toLowerCase().includes(value.toLowerCase()))
             );
-
             setWorkshop(result);
+        } else {
+            setWorkshop(workshopFixed);
         }
-        else {
-            setWorkshop(workshopFixed)
-        }
-    }
+    };
 
     return (
         <>
             <div className='p-8 flex'>
-                <div class="px-64 mb-4 flex-1">
+                <div className="px-64 mb-4 flex-1">
                     <input
                         type="text"
                         placeholder="Search for a workshop"
-                        class="border border-gray rounded w-full p-3"
+                        className="border border-gray rounded w-full p-3"
                         value={searchValue}
                         onChange={(e) => onChangeHandler(e.target.value)}
                     />
                 </div>
             </div>
-            <div className='flex gap-12 flex-wrap px-12 pl-16 py-2 pb-64' style={{ maxHeight: '800px', overflow: 'scroll' }}>
-                {workshop?.map((element, index) => {
-                    return (
-                        <WorkshopCard data={element} key={index} />
-                    )
-                })}
+            <div className="container mx-auto bg-white rounded-lg shadow-md overflow-hidden" style={{ maxHeight: '600px', overflowY: 'scroll' }}>
+                <table className="min-w-full">
+                    <thead className="bg-gray-800 text-white">
+                        <tr>
+                            <th className="px-6 py-3 text-left">Title</th>
+                            <th className="px-6 py-3 text-left">Category</th>
+                            <th className="px-6 py-3 text-left">Location</th>
+                            <th className="px-6 py-3 text-left">Date</th>
+                            <th className="px-6 py-3 text-left">Price</th>
+                            <th className="px-6 py-3 text-left">Slots Available</th>
+                            <th className="px-6 py-3 text-left">Instructor</th>
+                            <th className="px-6 py-3 text-left">Book</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {workshop.map((element, index) => (
+                            <WorkshopCard data={element} key={index} />
+                        ))}
+                    </tbody>
+                </table>
             </div>
         </>
-    )
-}
+    );
+};
+

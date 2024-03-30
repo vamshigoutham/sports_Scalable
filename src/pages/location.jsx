@@ -24,20 +24,50 @@ export const Location = () => {
     function onFailure(data) {
         console.log('Error Data:', typeof (data));
         setAllLocations([]);
-        setError("No locations found"); // Customize this message as needed
+        setError("No locations found. Try again!"); // Customize this message as needed
     }
 
     return (
         <div>
             <Form onSubmit={onSubmitData} />
-            {allLocations.length > 0 && (
+            {/* {allLocations.length > 0 && (
                 <>
                     <div className='text-center p-4 mt-6 text-2xl font-semibold'>Locations</div>
                     {allLocations.map((location) => (
                         <Card key={location._id} location={location} />
                     ))}
                 </>
-            )}
+            )} */}
+            {allLocations.length > 0 && (
+    <div className="text-center">
+        <div className='p-4 mt-6 text-2xl font-semibold'>Locations</div>
+        <div className="overflow-x-auto mx-auto max-w-screen-lg">
+            <table className="w-full bg-white rounded-lg overflow-hidden">
+                <thead className="bg-gray-800 text-white">
+                    <tr>
+                        <th className="px-6 py-3 text-center text-sm font-bold uppercase tracking-wider">City</th>
+                        <th className="px-6 py-3 text-center text-sm font-bold uppercase tracking-wider">Address</th>
+                        <th className="px-6 py-3 text-center text-sm font-bold uppercase tracking-wider">Zipcode</th>
+                    </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-200">
+                    {allLocations.map(location => (
+                        location.details.map(detail => (
+                            <tr key={detail._id} className="bg-gray-50 hover:bg-gray-100">
+                                <td className="px-6 py-4 whitespace-nowrap">{detail.city}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{detail.address}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{detail.pincode}</td>
+                            </tr>
+                        ))
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    </div>
+)}
+    
+
+
             {error && (
                 <div className='error-message text-center' style={{
                     animation: 'popUp 0.5s ease-out forwards',
