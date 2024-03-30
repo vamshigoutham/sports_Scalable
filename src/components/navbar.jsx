@@ -14,7 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { NavLink, useLocation } from 'react-router-dom';
 
-const pages = ['Find Location', 'Recommender', 'Workshop'];
+const pages = ['Sports Venue Finder', 'Recommender', 'Workshop'];
 
 function ResponsiveAppBar() {
     const location = useLocation();
@@ -73,10 +73,10 @@ function ResponsiveAppBar() {
                             {token ?
                                 <>
                                     <NavLink to='/'><MenuItem>Home</MenuItem></NavLink>
-                                    <NavLink to='/location'><MenuItem>Location</MenuItem></NavLink>
-                                    <NavLink to='/recommender'><MenuItem>Recommender</MenuItem></NavLink>
+                                    <NavLink to='/location'><MenuItem>Sports Venue Finder</MenuItem></NavLink>
+                                    <NavLink to='/recommender'><MenuItem>Sports Recommender</MenuItem></NavLink>
                                     <NavLink to='/workshop'><MenuItem>Workshop</MenuItem></NavLink>
-                                    <NavLink><MenuItem onClick={() => {
+                                    <NavLink to='/login'><MenuItem onClick={() => {
                                         localStorage.removeItem('token');
                                         localStorage.removeItem('user');
                                     }}>Logout</MenuItem></NavLink>
@@ -94,10 +94,10 @@ function ResponsiveAppBar() {
                         {token ?
                             <>
                                 <NavLink to='/'><MenuItem>Home</MenuItem></NavLink>
-                                <NavLink to='/location'><MenuItem>Location</MenuItem></NavLink>
-                                <NavLink to='/recommender'><MenuItem>Recommender</MenuItem></NavLink>
+                                <NavLink to='/location'><MenuItem>Sports Venue Finder</MenuItem></NavLink>
+                                <NavLink to='/recommender'><MenuItem>Sports Recommender</MenuItem></NavLink>
                                 <NavLink to='/workshop'><MenuItem>Workshop</MenuItem></NavLink>
-                                <NavLink><MenuItem onClick={() => {
+                                <NavLink to='/login'><MenuItem onClick={() => {
                                     localStorage.removeItem('token');
                                     localStorage.removeItem('user');
                                 }}>Logout</MenuItem></NavLink>
